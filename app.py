@@ -17,7 +17,9 @@ def prepare_order(qty: int) -> Dict[str, int]:
     large = 0
     total = 0
 
-    if qty is int and qty > 0:
+    qty = int(qty)
+
+    if qty > 0:
         while qty > 0:
             if qty <= 3:
                 small += 1
@@ -44,5 +46,4 @@ def prepare_order(qty: int) -> Dict[str, int]:
         orders['total'] = total
     else:
         print("You entered: ", type(qty), "Please provide an integer value")
-        exit(0)
     return orders

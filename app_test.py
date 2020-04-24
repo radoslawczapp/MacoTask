@@ -4,7 +4,9 @@ from app import prepare_order
 
 class TestInputType(unittest.TestCase):
     def test_type(self):
-        self.assertTrue(prepare_order(1))
+        self.assertTrue(prepare_order(2.0), None)
+        self.assertTrue(prepare_order(True), None)
+        self.assertTrue(prepare_order("2"), True)
 
 
 class TestOrdersQuantity(unittest.TestCase):
@@ -24,3 +26,6 @@ class TestOrdersQuantity(unittest.TestCase):
         self.assertEqual(prepare_order(8)['large'], 1)
         self.assertEqual(prepare_order(20)['large'], 2)
 
+
+if __name__ == '__main__':
+    unittest.main()
