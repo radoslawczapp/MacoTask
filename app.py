@@ -1,5 +1,6 @@
 from typing import Dict
 from math import ceil
+import sys
 
 
 def prepare_order(qty: int) -> Dict[str, int]:
@@ -16,29 +17,32 @@ def prepare_order(qty: int) -> Dict[str, int]:
     large = 0
     total = 0
 
-    while qty > 0:
-        if qty <= 3:
-            small += 1
-            break
-        elif qty <= 6:
-            medium += 1
-            break
-        elif qty <= 9:
-            large += 1
-            break
-        else:
-            large += qty // 9
-            qty %= 9
+    if qty is int and qty > 0:
+        while qty > 0:
+            if qty <= 3:
+                small += 1
+                break
+            elif qty <= 6:
+                medium += 1
+                break
+            elif qty <= 9:
+                large += 1
+                break
+            else:
+                large += qty // 9
+                qty %= 9
 
-    orders["small"] = small
-    orders["medium"] = medium
-    orders["large"] = large
+        orders["small"] = small
+        orders["medium"] = medium
+        orders["large"] = large
 
-    boxes_sum = small + medium + large
+        boxes_sum = small + medium + large
 
-    if boxes_sum > 1:
-        total = ceil(boxes_sum/3)
+        if boxes_sum > 1:
+            total = ceil(boxes_sum/3)
 
-    orders['total'] = total
-
+        orders['total'] = total
+    else:
+        print("You entered: ", type(qty), "Please provide an integer value")
+        exit(0)
     return orders
