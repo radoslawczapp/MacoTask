@@ -2,7 +2,7 @@ from typing import Dict
 from math import ceil
 
 
-def prepare_order(qty: int):
+def prepare_order(qty: int) -> Dict[str, int]:
     """
     This function takes quantity of an order and returns number of boxes and size of boxes
     you need to prepare to pack this order.
@@ -30,16 +30,15 @@ def prepare_order(qty: int):
             large += qty // 9
             qty %= 9
 
-    # orders["small"] = small
-    # orders["medium"] = medium
-    # orders["large"] = large
-    #
-    # return orders
-    return small, medium, large
+    orders["small"] = small
+    orders["medium"] = medium
+    orders["large"] = large
 
+    boxes_sum = small + medium + large
 
-# i = 10
-# print(i, prepare_order(i))
+    if boxes_sum > 1:
+        total = ceil(boxes_sum/3)
 
-for i in range(1, 101):
-    print(i, prepare_order(i))
+    orders['total'] = total
+
+    return orders
